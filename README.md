@@ -1,4 +1,4 @@
-# shell_sock 
+# shell_sock V2
 ## Server for Connecting to IoT Device PTY Terminal behind NAT
 
 ## Description
