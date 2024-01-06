@@ -2,9 +2,13 @@
 ## Server for Connecting to IoT Device PTY Terminal behind NAT
 
 ## Description
-This project aims to share the local terminal with a cloud proxy using `x509` certificates. Unlike SSH, there's no need to manage individual device keys centrally for authentication in `.ssh/authorized_keys`. Instead, it allows a reverse proxy on different ports for each device. For instance, unlike `ssh -R 12345:0.0.0.0:12345 user@proxy`, all IoT devices connect to a single port, and the admin only opens a TCP port when necessary. The x509-based certificate setup eliminates the need to manage SSH keys. All devices require certificates signed by the same CA used by the server.
+This project aims to share the local terminal with a cloud proxy using `x509` certificates. 
+Unlike SSH, there's no need to manage individual device keys centrally for authentication in `.ssh/authorized_keys`. 
+Instead, it allows to connect IoT via your own UNIX SOCK file. 
+For instance, unlike `ssh -R 12345:0.0.0.0:12345 user@proxy`, all IoT devices connect to Proxy Linux machina with 2 port. Signalling and Media for `/bin/bash`
+The x509-based certificate setup eliminates the need to manage SSH keys. All devices require certificates signed by the same CA used by the server.
 
-![Flow](https://github.com/aze2201/shell_sock/blob/main/shell_sock.png)
+![Flow](https://github.com/aze2201/shell_sock/blob/main/shell_sock.pndg)
 
 ## About socat
 Socat is a flexible, multi-purpose relay tool. Its purpose is to establish a relationship between two data sources, where each data source can be a file, a Unix socket, UDP, TCP, or standard input.
@@ -33,16 +37,25 @@ openssl req -new -key /etc/shell_sock/server/certs/server.key -out /etc/shell_so
   - Configure `/etc/shell_sock/client/server/server.conf` file
 ```
 # private key
-KEY=
+KEY=/etc/shell_sock/server/certs/server.key
 
 # SIGNED PUBLIC KEY X509
-CERT=
+CERT=/etc/shell_sock/server/certs/server.crt
 
 # CA public key chain
-CA_CERT=
+CA_CERT=/etc/shell_sock/server/certs/ca-chain.crt
 
 # SERVER LISTEN PORT
-PORT=
+PORT=22444
+
+# MEDIA (/bin/bash) PORT
+MEDIA_PORT=2222
+
+# TEMP FOLDER
+TEMP=/tmp/shell_sock
+
+# LOG FOLDER
+
 
 ```
   - Start server
