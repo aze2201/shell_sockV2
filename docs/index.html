@@ -50,8 +50,16 @@
 	
 	
 	
+	
     <div class="wrapper">
       <div class="installation">
+	  <h3 class="section__title">Description</h3>
+	<p>Numerous modern solutions exist for securely connecting Linux systems behind NAT. However, many of these solutions rely on external libraries and specific programming languages.
+
+SSH has long been the dominant method for secure OS connections. Yet, when managing over 200 devices, it necessitates maintaining public keys within <b>.authorized_keys</b>. This can lead to performance degradation during the authentication process. Furthermore, establishing remote Port Forwarding demands unique port allocation for each host, requiring a comprehensive understanding of which host is bound to which port.
+
+<b>Shell Sock V2</b> addresses these challenges comprehensively. <b>Shell Sock V2</b> enables each host to maintain independent keys through x509 signed keys, eliminating the need for maintenance on the host side. Users connect to each host via their individual UNIX-SOCKET file. Moreover, the only required dependency is the <b><code>socat</code></b> tool
+	</p>
         <h3 class="section__title">Installation</h3>
         <div class="tab__container">
           <ul class="tab__menu">
