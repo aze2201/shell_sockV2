@@ -14,10 +14,13 @@ echo "$(date)|INFO| $hostn folder is creating" >> "$LOG_PATH/shell_sock_$(date +
 while true; do
  sock_file=$(find "${TEMP}/${hostn}" -type s -name "*.sock" $(printf "! -name %s " $(cat "$TEMP/sock.db" | rev | cut -f1 -d"/" | rev)))
  if [ ! -z "$sock_file" ]; then
+ 
   # if sock file exists then store it as session
   echo "$sock_file" >> "$TEMP/sock.db"
+  
   # generate random number
   session_id=$(openssl rand -base64 7 | base64)
+  
   # send to client to initialize /bin/bash and map to newest sock file.
   echo $session_id
   echo "$session_id|$sock_file" >> "$TEMP/map.table"
