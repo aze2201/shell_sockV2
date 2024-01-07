@@ -49,10 +49,10 @@ help()
     echo "  {-C|--ca-cert    }  CA file      -- Set CA public key    or   root@shell_sock:~# export CA_CERT="
     echo "  {-p|--port       }  PORT         -- Set listen port      or   root@shell_sock:~# export PORT="
     echo "  {-s|--server     }  SERVER       -- Set server ip|domain or   root@shell_sock:~# export SERVER="
-	echo "  {-m|--media-port }  MEDIA_PORT   -- Set port for bash    or   root@shell_sock:~# export MEDIA_PORT="
-	echo "  {-t|--temp-dir   }  TEMP         -- Set tmp dir          or   root@shell_sock:~# export TEMP="
-	echo "  {-l|--log        }  LOG_PATH     -- Set LOG directory    or   root@shell_sock:~# export LOG_PATH="
-	echo "  {-d|--debug      }  DEBUG leve from 1 to 3"
+    echo "  {-m|--media-port }  MEDIA_PORT   -- Set port for bash    or   root@shell_sock:~# export MEDIA_PORT="
+    echo "  {-t|--temp-dir   }  TEMP         -- Set tmp dir          or   root@shell_sock:~# export TEMP="
+    echo "  {-l|--log        }  LOG_PATH     -- Set LOG directory    or   root@shell_sock:~# export LOG_PATH="
+    echo "  {-d|--debug      }  DEBUG leve from 1 to 3"
     echo ""               
     exit 0
 }
@@ -156,7 +156,7 @@ function signalling() {
       
 	  # if message is Session ID then, connect local bash to remote 
 	  if [ "$line" != "$(hostname)" ]; then
-	    # Log
+	        # Log
 		echo "bin/bash-ing with session $line to $SERVER:$PORT" >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
         
 		# connect bash in background
