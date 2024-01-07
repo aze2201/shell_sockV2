@@ -8,7 +8,7 @@ Instead, it allows to connect IoT via your own UNIX SOCK file.
 For instance, unlike `ssh -R 12345:0.0.0.0:12345 user@proxy`, all IoT devices connect to Proxy Linux machina with 2 port. Signalling and Media for `/bin/bash`
 The x509-based certificate setup eliminates the need to manage SSH keys. All devices require certificates signed by the same CA used by the server.
 
-![Flow](https://github.com/aze2201/shell_sockV2/docs/blob/main/shell_sockV2.png)
+![Flow](https://github.com/aze2201/shell_sockV2/blob/main/docs/shell_sockV2.png)
 
 ## About socat
 Socat is a flexible, multi-purpose relay tool. Its purpose is to establish a relationship between two data sources, where each data source can be a file, a Unix socket, UDP, TCP, or standard input.
