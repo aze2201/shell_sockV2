@@ -161,7 +161,6 @@ main () {
   # inialize environment
   initialize
   
-  echo "$socat_command"
   echo "SIGNALLING SERVER START 0.0.0.0:$PORT"
   echo "SIGNALLING SERVER START 0.0.0.0:$MEDIA_PORT"
   
@@ -170,11 +169,11 @@ main () {
   [ $? -eq 0 ] && echo $! > $_PID/signalling.pid || 
     (
       echo "$(date)| ERROR| Signalling server not started. Maybe try with bash -x <script>"	
-	  exit 1
-	)
+      exit 1
+     )
   
-  # Start Media script
-  media
+   # Start Media script
+   media
 }
 
 main
