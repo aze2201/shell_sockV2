@@ -2,43 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IoT Device Management</title>
+  <title>Terminal Sharing via x509 Certificates</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>IoT Device Management</h1>
-    <p>Connect and manage IoT devices via X509 certificates</p>
-  </header>
+<header>
+  <div class="container">
+    <h1>Terminal Sharing via x509 Certificates</h1>
+    <p>A secure method to share local terminals with a cloud proxy</p>
+  </div>
+</header>
 
-  <main>
+<main>
+  <div class="container">
     <section>
       <h2>About</h2>
-      <p>Welcome to our IoT device management system. This platform enables secure connections for IoT devices to the cloud using X509 certificates.</p>
+      <p>This project facilitates terminal sharing with a cloud proxy using x509 certificates. Unlike traditional SSH setups, managing individual device keys centrally in `.ssh/authorized_keys` is not necessary. It enables IoT device connections via a UNIX SOCK file, simplifying the process.</p>
     </section>
 
     <section>
-      <h2>Features</h2>
+      <h2>Key Features</h2>
       <ul>
-        <li>Secure connections via X509 certificates</li>
-        <li>Remote management of IoT devices</li>
-        <li>Cloud-based proxy for device connectivity</li>
+        <li>No need for managing individual SSH keys</li>
+        <li>Connections established via UNIX SOCK file</li>
+        <li>Secure setup with x509 certificates</li>
+        <li>Proxy Linux machine handling signalling and media for `/bin/bash`</li>
       </ul>
     </section>
 
     <section>
-      <h2>Get Started</h2>
-      <p>To start managing your IoT devices, log in with your credentials.</p>
-      <button>Login</button>
+      <h2>How It Works</h2>
+      <p>All IoT devices connect to the Proxy Linux machine using two ports, one for signalling and another for `/bin/bash` media.</p>
+      <p>The x509 certificate setup ensures a secure connection, requiring certificates signed by the same CA utilized by the server.</p>
     </section>
-  </main>
+  </div>
+</main>
 
-  <footer>
-    <p>&copy; 2024 IoT Device Management</p>
-  </footer>
-</div>
+<footer>
+  <div class="container">
+    <p>&copy; 2024 Terminal Sharing Project</p>
+  </div>
+</footer>
 
 </body>
 </html>
