@@ -151,8 +151,8 @@ function signalling() {
    echo $(hostname) > $_SHELL_FIFO
    cat $_SHELL_FIFO -| $socat_command - OPENSSL:$SERVER:$PORT,cafile=$CA_CERT,key=$KEY,cert=$CERT,verify=4 | while read line; 
    do
-      # Log   
-      echo "$(date)| Message from $SERVER:$PORT is $line"       >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
+          # Log   
+          echo "$(date)| Message from $SERVER:$PORT is $line"       >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
       
 	  # if message is Session ID then, connect local bash to remote 
 	  if [ "$line" != "$(hostname)" ]; then
