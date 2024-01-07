@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Scribbler - a codding landing page template for codrops</title>
+      <title>Shell Sock V2</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
@@ -21,48 +21,80 @@
         <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
       </ul>
     </nav>
+	
+	
     <div class="hero">
-      <h1 class="hero__title">Scribbler</h1>
-      <p class="hero__description">Take your markdown notes in terminal</p>
+      <h1 class="hero__title">Shell Sock V2 Server</h1>
+      <p class="hero__description">Start server via x509 certificates</p>
     </div>
-    <div class="hero__terminal">
+    
+	<div class="hero__terminal">
       <pre>
         <!-- Place your demo code here -->
-        <code class="shell-session demo">hyperyolo ~ $ </code>
+        <code class="shell-session demo">root@proxy ~ $ </code>
       </pre>
     </div>
+
+
+    <div class="hero1">
+       <h1 class="hero1__title">Shell Sock V2 Client</h1>
+       <p class="hero1__description">Connect to your <code>/bin/bash</code> via x509 certificates</p>
+     </div>
+    
+     <div class="hero1__terminal">
+      <pre>
+        <!-- Place different demo code here -->
+        <code class="shell-session1 demo-client">root@raspberry ~ $ </code>
+      </pre>
+    </div>
+	
+	
+	
     <div class="wrapper">
       <div class="installation">
         <h3 class="section__title">Installation</h3>
         <div class="tab__container">
           <ul class="tab__menu">
-            <li class="tab active" data-tab="mac">mac</li>
-            <li class="tab" data-tab="linux">linux</li>
-            <li class="tab" data-tab="win">win</li>
+		    <li class="tab active" data-tab="linux">linux</li>
+            <li class="tab" data-tab="mac">mac</li>
+            
+
           </ul>
           <pre class="nohighlight code">
-            <code class="tab__pane active mac">$  brew install scribbler</code>
-            <code class="tab__pane linux">$  apt-get install scribbler</code>
-            <code class="tab__pane win">$  gem install scribbler</code>
+            <code class="tab__pane  mac">$  git clone https://github.com/aze2201/shell_sockV2.git<br>
+			$ cd shell_sockV2.git<br>
+			$ # installing server<br>
+			$ make server<br>
+			$ # installing client<br>
+			$ make client</code>
+            <code class="tab__pane active linux">$  git clone https://github.com/aze2201/shell_sockV2.git<br>
+			$ sudo apt-get install make socat<br>
+			$ cd shell_sockV2.git<br>
+			$ # install server on porxy Linux or Mac<br>
+			$ make server<br>
+			$ # install client on IoT device<br>
+			$ make client</code>
           </pre>
         </div>
       </div>
       <div class="feature">
         <div class="feature__item">
-          <h3 class="section__title">Fast & Light</h3>
-          <p>Start writing your notes immediately in any terminal! No more time wasted on navigating and opening your text editor.</p>
+          <h3 class="section__title">Easy & Light</h3>
+          <p>The project's goal is to create a terminal with minimal dependencies on libraries and programming languages while ensuring security. It's designed to be easily installable.</p>
         </div>
-        <div class="feature__item">
-          <h3 class="section__title">File Syncing</h3>
-          <p>Save your file in Dropbox then you can access to it from anywhere.</p>
-        </div>
+        
         <div class="feature__item">
           <h3 class="section__title">Secure</h3>
-          <p>Encrypt your notes optionally. No one can get to your secrets! </p>
+          <p>Secure your Bash terminal access by encrypting it with x509 certificates. Using x509 certificates eliminates the need to manage a .ssh/authorized_keys file for over 1000 devices</p>
         </div>
         <div class="feature__item">
           <h3 class="section__title">Configuration</h3>
-          <p>Maintain all your settings in a single <span class="code code--inline">config.json</span> file. Never need to redo the setting every single time jotting down a note.</p>
+          <p>Integrate the <code>socat</code> tool, deploy the application using <code>Make</code>, and then transition control to systemd or your custom main script<span class="code code--inline">config.json</span> file. Never need to redo the setting every single time jotting down a note.</p>
+        </div>
+		<!--
+		<div class="feature__item">
+          <h3 class="section__title">File Syncing</h3>
+          <p>Save your file in Dropbox then you can access to it from anywhere.</p>
         </div>
         <div class="feature__item">
           <h3 class="section__title">Highlightings</h3>
@@ -72,29 +104,33 @@
           <h3 class="section__title">Keybindings</h3>
           <p>You can expect common keybindings for scribbler. Customize <span class="code code--inline">bindings.json</span> for your own liking! </p>
         </div>
+		-->
       </div>
       <div class="keybinding">
         <ul class="keybinding__detail">
-          <h3 class="keybinding__title">Default Keybindings</h3>
-          <li>Quit without saving <span class="keybinding__label">Ctrl+C</span></li>
-          <li>Save <span class="keybinding__label">Cmd+S</span></li>
-          <li>Save and Quit <span class="keybinding__label">Ctrl+D</span></li>
-          <li>Undo <span class="keybinding__label">Cmd+Z</span></li>
+          <h3 class="keybinding__title">Config keys</h3>
+          <li>Config folder <span class="keybinding__label">PATH</span></li>
+          <li>Server app default config <span class="keybinding__label">/etc/shell_sock/server/config/</span></li>
+		  <li>Client app default config <span class="keybinding__label">/etc/shell_sock/client/config/</span></li>
+          <li>x509 certs <span class="keybinding__label">/etc/shell_sock/server|client/certs/</span></li>
         </ul>
         <ul class="keybinding__detail">
-          <h3 class="keybinding__title">Markdown Keybindings</h3>
-          <li><span class="keybinding__label">Ctrl+A</span> Insert Link Markdown</li>
-          <li><span class="keybinding__label">Ctrl+I</span> Insert Image Markdown</li>
-          <li><span class="keybinding__label">Ctrl+V</span> Insert YouTube Video</li>
-          <li><span class="keybinding__label">Ctrl+T</span> Insert Table</li>
+          <h3 class="keybinding__title">Config values</h3>
+          <li><span class="keybinding__label">/etc/shell_sock</span> All configuration path</li>
+          <li><span class="keybinding__label">server.conf</span> You can add your own .conf</li>
+		  <li><span class="keybinding__label">client.conf</span> You can add your own .conf</li>
+		  <li><span class="keybinding__label">*.key,*.pem,*.crt</span> Private key, public key and ca chain key</li>
         </ul>
       </div>
+	  
+	    
       <div class="callout">
         <p>Read our documentation for advanced keybindings and customization</p>
         <a href="doc.html" class="button--primary">Documentation</a>
       </div>
     </div>
-    <div class="changelog">
+    
+	<!-- <div class="changelog">
       <div class="wrapper">
         <h3 class="section__title">Changelog</h3>
         <div class="changelog__item">
@@ -140,8 +176,9 @@
           <a href="#" class="button--secondary">Checkout Full Log</a>
         </div>
       </div>
+	  -->
     </div>
-    <footer class="footer">Scribbler is a free HTML template created exclusively for <a href="https://tympanus.net/codrops/" target="_blank" class="link link--light">Codrops</a>.</footer>
+    <footer class="footer">Support me with cofee <a href="https://www.buymeacoffee.com/2kfAp0elyz" target="_blank" class="link link--light">buymeacoffee</a>.</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="scribbler.js"></script>

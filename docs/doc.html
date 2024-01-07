@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shell Sock V2 Doc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="scribbler-global.css">
+    <link rel="stylesheet" href="scribbler-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo">Shell Sock V2 <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://github.com/aze2201/shell_sockV2.svg" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="index.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">Get Started</li>
+          <li class="js-btn">Configuration</li>
+          <li class="js-btn">Start applications</li>
+          <li class="js-btn">Issues</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h3 class="section__title">Get Started</h3>
+          <h3 class="section__title">How it works</h3>
+		  <img src="shell_sockV2.svg"  width="800" height="600" alt="image">
+          <h3 class="section__title">Installation Server</h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo apt-get install make socat
+				$ git clone https://github.com/aze2201/shell_sockV2.git
+				$ cd shell_sockV2
+				$ make server
+              </code>
+			  
+            </pre>
+          </div>
+		  <h3 class="section__title">Installation Client IoT</h3>
+		  <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo apt-get install make socat
+				$ git clone https://github.com/aze2201/shell_sockV2.git
+				$ cd shell_sockV2
+				$ make client
+              </code>
+			  
+            </pre>
+          </div>
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Configuration</h3>
+          
+		  <p>Create cryptographic keys with OpenSSL </p>
+		  <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ # private key
+				$ openssl genrsa -out server.key 4096
+				$ # Certificate Request for CA
+				$ openssl req -new -key server.key -out server.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:AZ
+State or Province Name (full name) [Some-State]:Baku
+Locality Name (eg, city) []:Baku
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:SysEng         
+Organizational Unit Name (eg, section) []:Open Source Team
+Common Name (e.g. server FQDN or YOUR name) []:proxy-linux.az 
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+				$ 
+				$ cat server.csr 
+-----BEGIN CERTIFICATE REQUEST-----
+MIIEtTCCAp0CAQAwcDELMAkGA1UEBhMCQVoxDTALBgNVBAgMBEJha3UxDTALBgNV
+BAcMBEJha3UxDzANBgNVBAoMBlN5c0VuZzEZMBcGA1UECwwQT3BlbiBTb3VyY2Ug
+...
+-----END CERTIFICATE REQUEST-----
+              </code>
+			  
+            
+			
+			
+          </div>
+		  <p>&#8226; Repeat certificate creation process for Client IoT devices</p>
+		  <p>&#8226; Get signed certificate from CA and store in <code>/etc/shell_sock/server/certs</code> and <code>/etc/shell_sock/client/certs<code>  accordingly</p>
+		  
+		  <h3 class="section__title">Setup Server config file </h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo vi /etc/shell_sock/server/config/server.conf
+				KEY=/etc/shell_sock/server/certs/server.key
+
+# SIGNED PUBLIC KEY X509
+CERT=/etc/shell_sock/server/certs/server.crt
+
+# CA public key chain
+CA_CERT=/etc/shell_sock/server/certs/ca-chain.crt
+
+# SERVER LISTEN PORT
+PORT=22444
+
+# MEDIA (/bin/bash) PORT
+MEDIA_PORT=2222
+
+# TEMP FOLDER
+TEMP=/tmp/shell_sock
+
+# LOG FOLDER
+LOG_PATH=/var/log/shell_sock
+              </code>
+            </pre>
+          </div>
+		  
+		  
+		  <h3 class="section__title">Setup Client config file </h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo vi /etc/shell_sock/client/config/client.conf
+				# private key
+KEY=/etc/shell_sock/client/certs/client.key
+
+# SIGNED PUBLIC KEY X509
+CERT=/etc/shell_sock/client/certs/client.crt
+
+# CA public key chain
+CA_CERT=/etc/shell_sock/client/certs/ca-cert.crt
+
+# SERVER IP address or DOMAIN
+# please not that, domain name should match with certificate DNS information
+SERVER=Proxy domain
+
+# SERVER PORT FOR SIGNALLING
+PORT=22444
+
+# SERVER PORT FOR /bin/bash MEDIA
+MEDIA_PORT=2222
+
+# LOGGING
+LOG_PATH=/var/log/shell_sock
+
+# TEMP DIR
+TEMP=/tmp/shell_sock
+              </code>
+            </pre>
+          </div>
+		  
+		  <h3 class="section__title">Start server proxy </h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo systemctl restart shell_sock_server
+              </code>	  
+            </pre>
+          </div>
+		  
+		  <h3 class="section__title">Start Client IoT </h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo systemctl restart shell_sock_client
+              </code>
+            </pre>
+          </div>
+		  
+		  
+		  
+		  
+		  
+		  
+          <table id="customers">
+            <tr>
+              <th>Options</th>
+              <th>Value</th>
+              <th>Default</th>
+            </tr>
+            <tr>
+              <td>encryption</td>
+              <td>Using TLS connection</td>
+              <td>true</td>
+            </tr>
+            <tr>
+              <td>re-Configurable</td>
+              <td>Always configuration can be adjusted via static conf or input argument</td>
+              <td>true</td>
+            </tr>
+            <tr>
+              <td>Authentication</td>
+              <td>All devices are signed by CA.</td>
+              <td>true</td>
+            </tr>
+          </table>
+          <hr />
+        </section>
+		
+		
+        <section class="js-section">
+          <h3 class="section__title">Manual start server</h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ ./shell_sock_server.sh --help
+Loading configuration...
+Configurations are loaded !
+
+To share accept terminal PTY requires certificates wich is signed by any CA
+Generate private key: root@shell_sock:~\# openssl genrsa -out certs/server.key 4096
+Generate CSR key:     root@shell_sock:~\# openssl req -new -key certs/server.key -out certs/server.csr
+Send CSR file to CA and obtain signed PEM or CRT file and store certs folder (x509)
+Get CA public key chain
+
+  {-k|--key        }  private key   -- Set prvate key      or   root@shell_sock:~# export KEY=
+  {-c|--cert       }  public key    -- Set public key      or   root@shell_sock:~# export CERT=
+  {-C|--ca-cert    }  CA file       -- Set CA public key   or   root@shell_sock:~# export CA_CERT=
+  {-p|--port       }  PORT          -- Set signalling port or   root@shell_sock:~# export PORT=
+  {-m|--media-port }  MEDIA_PORT    -- Set media  port     or   root@shell_sock:~# export MEDIA_PORT=
+  {-t|--temp       }  TEMP          -- Set TEMP folder     or   root@shell_sock:~# export TEMP=
+  {-l|--log        }  LOG_PATH      -- Set LOG folder      or   root@shell_sock:~# export LOG_PATH=
+  {-d|--debug      }  DEBUG leve from 1 to 3
+				$
+				$ shell_sock_server.sh -k /etc/shell_sock/server/certs/server.key -c /etc/shell_sock/server/certs/server.crt -C /etc/shell_sock/server/certs/ca-chain.crt -p 22447 --media-port 2223 -t /tmp/tempor -l /var/log/shell_sock/ --debug 2
+              </code>	  
+            </pre>
+          </div>
+		  
+		  <h3 class="section__title">Manual start client </h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ ./shell_sock_client.sh --help
+Loading configuration
+Configurations are loaded
+
+To share terminal to server requires certificates wich is signed by any CA
+Generate private key: root@shell_sock:~\# openssl genrsa -out certs/server.key 4096
+Generate CSR key:     root@shell_sock:~\# openssl req -new -key certs/server.key -out certs/server.csr
+Send CSR file to CA and obtain signed PEM or CRT file and store certs folder (x509)
+Get CA public key chain
+
+  {-k|--key        }  private key  -- Set prvate key       or   root@shell_sock:~# export KEY=
+  {-c|--cert       }  public key   -- Set public key       or   root@shell_sock:~# export CERT=
+  {-C|--ca-cert    }  CA file      -- Set CA public key    or   root@shell_sock:~# export CA_CERT=
+  {-p|--port       }  PORT         -- Set listen port      or   root@shell_sock:~# export PORT=
+  {-s|--server     }  SERVER       -- Set server ip|domain or   root@shell_sock:~# export SERVER=
+  {-m|--media-port }  MEDIA_PORT   -- Set port for bash    or   root@shell_sock:~# export MEDIA_PORT=
+  {-t|--temp-dir   }  TEMP         -- Set tmp dir          or   root@shell_sock:~# export TEMP=
+  {-l|--log        }  LOG_PATH     -- Set LOG directory    or   root@shell_sock:~# export LOG_PATH=
+  {-d|--debug      }  DEBUG leve from 1 to 3
+				$
+				$ ./shell_sock_client.sh -s proxy.com -p 22447 --media-port 2223 -k client.key -c client.crt -C ca-cert.crt -t /tmp/shell_sock -l /var/run/shell_sock
+Loading configuration
+Configurations are loaded
+..Startging to connect to: mqtt.dev2.inno2grid.net:22447
+              </code>	  
+            </pre>
+          </div>
+		  
+		  <h3 class="section__title">Connect to IoT </h3>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ ssh -t root@proxy.com "socat UNIX-LISTEN:/tmp/shell_sock/raspery-IoT/fariz.sock -",raw,echo=0
+bash: cannot set terminal process group (12785): Inappropriate ioctl for device
+bash: no job control in this shell
+root@raspery-IoT:/# 
+              </code>
+            </pre>
+          </div>
+		  
+		  
+		  
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Issues</h3>
+		  <p>Project is very new. I will appreciate to report any issues or PR</p>
+		  <p>You can contact me over ...<br>
+		  <a href="https://www.linkedin.com/in/fariz-muradov-b100a268/" target="_blank" class="link link--light">Linkedin</a><br>
+		  <a href="https://medium.com/@farizmuradov" target="_blank" class="link link--light">Medium</a><br>
+		  <a href="https://twitter.com/fariz2201" target="_blank" class="link link--light">X | Twitter</a>
+		  
+		  
+		  </p>
+        </section>
+      </article>
+    </div>
+
+    <footer class="footer">Support me with cofee <a href="https://www.buymeacoffee.com/2kfAp0elyz" target="_blank" class="link link--light">buymeacoffee</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
+</html>

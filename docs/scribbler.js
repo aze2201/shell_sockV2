@@ -12,16 +12,19 @@ var getAll = function (selector, scope) {
 // setup typewriter effect in the terminal demo
 if (document.getElementsByClassName('demo').length > 0) {
   var i = 0;
-  var txt = `scribbler
-            [Entry mode; press Ctrl+D to save and quit; press Ctrl+C to quit without saving]
-
-            ###todo for new year dinner party
-
-            - milk
-            - butter
-            - green onion
-            - lots and lots of kiwis 🥝`;
-  var speed = 60;
+  var txt = `shell_sock_server.sh -k server.key    \
+  -c server.crt                                    \
+  -C ca-chain.crt -p 22447 --media-port 2223       \
+  -t /tmp/tempor -l /var/log/shell_sock
+  Loading configuration...
+Configurations are loaded !
+/usr/bin/socat
+SIGNALLING SERVER START 0.0.0.0:22447
+SIGNALLING SERVER START 0.0.0.0:2223
+2024/01/07 17:22:58 socat[3837061] N listening on AF=2 0.0.0.0:2223
+2024/01/07 17:22:58 socat[3837062] N listening on AF=2 0.0.0.0:22447
+  `
+  var speed = 5;
 
   function typeItOut () {
     if (i < txt.length) {
@@ -33,6 +36,30 @@ if (document.getElementsByClassName('demo').length > 0) {
 
   setTimeout(typeItOut, 1800);
 }
+
+
+// setup typewriter effect in the terminal demo
+if (document.getElementsByClassName('demo-client').length > 0) {
+  var z = 0;
+  var txt_client = `./shell_sock_client.sh -s proxyLinux -p 22447 --media-port 2223 -k client.key -c client.crt -C ca-cert.crt -t /tmp/shell_sock -l /var/run/shell_sock
+Loading configuration
+Configurations are loaded
+..Startging to connect to: proxy:22447
+  `
+  var client_speed = 15;
+
+  function typeItOutClient () {
+    if (z < txt_client.length) {
+      document.getElementsByClassName('demo-client')[0].innerHTML += txt_client.charAt(z);
+      z++;
+      setTimeout(typeItOutClient, client_speed);
+    }
+  }
+
+  setTimeout(typeItOutClient, 1800);
+}
+
+
 
 // toggle tabs on codeblock
 window.addEventListener("load", function() {
