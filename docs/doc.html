@@ -222,7 +222,8 @@ TEMP=/tmp/shell_sock
           <div class="code__block code__block--notabs">
             <pre class="code code--block">
               <code>
-                $ ./shell_sock_server.sh --help
+			  <pre>
+$ ./shell_sock_server.sh --help
 Loading configuration...
 Configurations are loaded !
 
@@ -240,17 +241,25 @@ Get CA public key chain
   {-t|--temp       }  TEMP          -- Set TEMP folder     or   root@shell_sock:~# export TEMP=
   {-l|--log        }  LOG_PATH      -- Set LOG folder      or   root@shell_sock:~# export LOG_PATH=
   {-d|--debug      }  DEBUG leve from 1 to 3
-				$
-				$ shell_sock_server.sh -k /etc/shell_sock/server/certs/server.key -c /etc/shell_sock/server/certs/server.crt -C /etc/shell_sock/server/certs/ca-chain.crt -p 22447 --media-port 2223 -t /tmp/tempor -l /var/log/shell_sock/ --debug 2
-              </code>	  
+$
+$ shell_sock_server.sh -k server.key -c server.crt -C ca-chain.crt -p 22447 --media-port 2223 -t /tmp/tempor -l /var/log/shell_sock/ --debug 2
+Loading configuration...
+Configurations are loaded !
+/usr/bin/socat -d -d
+SIGNALLING SERVER START 0.0.0.0:22447
+SIGNALLING SERVER START 0.0.0.0:2223
+2024/01/07 17:22:58 socat[3837061] N listening on AF=2 0.0.0.0:2223
+2024/01/07 17:22:58 socat[3837062] N listening on AF=2 0.0.0.0:22447
+              </pre>
+			  </code>	  
             </pre>
           </div>
-		  
 		  <h3 class="section__title">Manual start client </h3>
           <div class="code__block code__block--notabs">
             <pre class="code code--block">
               <code>
-                $ ./shell_sock_client.sh --help
+<pre>
+$ ./shell_sock_client.sh --help
 Loading configuration
 Configurations are loaded
 
@@ -269,15 +278,15 @@ Get CA public key chain
   {-t|--temp-dir   }  TEMP         -- Set tmp dir          or   root@shell_sock:~# export TEMP=
   {-l|--log        }  LOG_PATH     -- Set LOG directory    or   root@shell_sock:~# export LOG_PATH=
   {-d|--debug      }  DEBUG leve from 1 to 3
-				$
-				$ ./shell_sock_client.sh -s proxy.com -p 22447 --media-port 2223 -k client.key -c client.crt -C ca-cert.crt -t /tmp/shell_sock -l /var/run/shell_sock
+$
+$ ./shell_sock_client.sh -s proxy.com -p 22447 --media-port 2223 -k client.key -c client.crt -C ca-cert.crt -t /tmp/shell_sock -l /var/run/shell_sock
 Loading configuration
 Configurations are loaded
-..Startging to connect to: mqtt.dev2.inno2grid.net:22447
+..Startging to connect to: proxy:22447
+<pre>
               </code>	  
             </pre>
-          </div>
-		  
+          </div>	  
 		  <h3 class="section__title">Connect to IoT </h3>
           <div class="code__block code__block--notabs">
             <pre class="code code--block">
