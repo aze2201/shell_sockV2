@@ -1,3 +1,5 @@
+[![UNIX](https://img.shields.io/badge/unix-socket-blue)](https://en.wikipedia.org/wiki/Unix_domain_socket)
+
 # shell_sock V2
 ## Server for Connecting to IoT Device PTY Terminal behind NAT
 
