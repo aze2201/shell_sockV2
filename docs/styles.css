@@ -48,3 +48,10 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+.responsive-img {
+      max-width: 100%; /* Max width of the image is 100% of its container */
+      height: auto; /* Maintain the aspect ratio */
+      display: block; /* Ensure the image is displayed as a block element */
+      margin: 0 auto; /* Center the image horizontally */
+    }
