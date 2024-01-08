@@ -9,11 +9,7 @@
 ## Server for Connecting to IoT Device PTY Terminal behind NAT
 
 ## Description
-This project aims to share the local terminal with a cloud proxy using `x509` certificates. 
-Unlike SSH, there's no need to manage individual device keys centrally for authentication in `.ssh/authorized_keys`. 
-Instead, it allows to connect IoT via your own UNIX SOCK file. 
-For instance, unlike `ssh -R 12345:0.0.0.0:12345 user@proxy`, all IoT devices connect to Proxy Linux machina with 2 port. Signalling and Media for `/bin/bash`
-The x509-based certificate setup eliminates the need to manage SSH keys. All devices require certificates signed by the same CA used by the server.
+Numerous modern solutions exist for securely connecting Linux systems behind NAT. However, many of these solutions rely on external libraries and specific programming languages. SSH has long been the dominant method for secure OS connections. Yet, when managing over 200 devices, it necessitates maintaining public keys within .authorized_keys. This can lead to performance degradation during the authentication process. Furthermore, establishing remote Port Forwarding demands unique port allocation for each host, requiring a comprehensive understanding of which host is bound to which port. Shell Sock V2 addresses these challenges comprehensively. Shell Sock V2 enables each host to maintain independent keys through x509 signed keys, eliminating the need for maintenance on the host side. Users connect to each host via their individual UNIX-SOCKET file. Moreover, the only required dependency is the socat tool
 
 ![Flow](https://github.com/aze2201/shell_sockV2/blob/main/docs/shell_sockV2.png)
 
