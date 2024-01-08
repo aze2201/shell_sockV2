@@ -73,7 +73,8 @@ client:
 	cp -r $(CURR_SHELL_SOCK)/client/config/client.conf $(CLNT_CONF_SHELL_SOCK)/
 	cp -r $(CURR_SHELL_SOCK)/client/config/shell_sock_client.service $(SYSTEMD_INIT_PATH)/shell_sock_client.service
 	cp -r $(CURR_SHELL_SOCK)/client/shell_sock_client.sh $(ROOT_SHELL_SOCK)/
-	chmod +x $(ROOT_SHELL_SOCK)/shell_sock_client.sh
+	cp -r $(CURR_SHELL_SOCK)/server/bash_media.sh $(ROOT_SHELL_SOCK)/
+	chmod +x $(ROOT_SHELL_SOCK)/shell_sock_client.sh $(ROOT_SHELL_SOCK)/bash_media.sh
 	systemctl daemon-reload
 	systemctl enable shell_sock_client.service
 	@echo "${YELLOW}Client installation complete.${NC}"
