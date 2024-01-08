@@ -25,6 +25,7 @@ SIGNALLING SERVER START 0.0.0.0:2223
 2024/01/07 17:22:58 socat[3837062] N listening on AF=2 0.0.0.0:22447
   `
   var speed = 5;
+  var client_start = 1;
 
   function typeItOut () {
     if (i < txt.length) {
@@ -32,12 +33,19 @@ SIGNALLING SERVER START 0.0.0.0:2223
       i++;
       setTimeout(typeItOut, speed);
     }
+	
+	else {
+		var client_start = 1;
+		runClientAnimation();
+	}
+	
   }
 
   setTimeout(typeItOut, 1800);
 }
 
 
+function runClientAnimation() {
 // setup typewriter effect in the terminal demo
 if (document.getElementsByClassName('demo-client').length > 0) {
   var z = 0;
@@ -46,7 +54,7 @@ Loading configuration
 Configurations are loaded
 ..Startging to connect to: proxy:22447
   `
-  var client_speed = 15;
+  var client_speed = 5;
 
   function typeItOutClient () {
     if (z < txt_client.length) {
@@ -54,10 +62,54 @@ Configurations are loaded
       z++;
       setTimeout(typeItOutClient, client_speed);
     }
+	
+	else {
+	  var devops_start = 1;
+	  runDevOpsAnimation(); // Call the function to start the next animation (devops animation)
+    }
+  }
+  
+   if (client_start === 1) {
+      setTimeout(typeItOutClient, 1800);
+    }
+  
+
+  
+}
+}
+
+
+
+function runDevOpsAnimation() {
+// setup typewriter effect in the terminal demo
+if (document.getElementsByClassName('demo-client').length > 0) {
+  var y = 0;
+  var txt_devops = `ssh -t root@proxy "socat UNIX-LISTEN:/tmp/shell_sock/raspberry/devopsUser.sock -",raw,echo=0
+bash: cannot set terminal process group (957): Inappropriate ioctl for device
+bash: no job control in this shell
+root@raspberry:/# 
+root@raspberry:/# ls
+bin  boot  cdrom  dev  etc  home  lib  lib32  lib64  libx32  lost+found  media  mnt  opt  proc  root  run  sbin  srv  swapfile  sys  tmp  usr  var
+  `
+  var client_devops = 5;
+
+  if (devops_start = 1) {
+  function typeItOutDevOps () {
+    if (y < txt_devops.length) {
+      document.getElementsByClassName('demo-devops')[0].innerHTML += txt_devops.charAt(y);
+      y++;
+      setTimeout(typeItOutDevOps, client_devops);
+    }
+  }
   }
 
-  setTimeout(typeItOutClient, 1800);
+  if (devops_start === 1) {
+      setTimeout(typeItOutDevOps, 1800);
+    }
 }
+}
+
+
 
 
 
