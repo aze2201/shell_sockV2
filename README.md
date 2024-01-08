@@ -25,7 +25,7 @@ Socat is a flexible, multi-purpose relay tool. Its purpose is to establish a rel
 ### Installing Server (proxy)
 ```
 apt-get install socat make
-git clone https://github.com/aze2201/shell_sock.git`
+git clone https://github.com/aze2201/shell_sockV2.git`
 cd shell_sock
 make server
 ```
@@ -79,25 +79,20 @@ set +a
 Help
 ```
 /etc/shell_sock/shell_sock_server.sh 
-Loading configuration...
-Configurations are loaded !
-
-ERROR: Some of arguments are not specified !! 
-
 To share accept terminal PTY requires certificates wich is signed by any CA
 Generate private key: root@shell_sock:~\# openssl genrsa -out certs/server.key 4096
 Generate CSR key:     root@shell_sock:~\# openssl req -new -key certs/server.key -out certs/server.csr
 Send CSR file to CA and obtain signed PEM or CRT file and store certs folder (x509)
 Get CA public key chain
 
-  {-k|--key     }  private key   -- Set prvate key     or   root@shell_sock:~# export KEY=
-  {-c|--cert    }  public key    -- Set public key     or   root@shell_sock:~# export CERT=
-  {-C|--ca-cert }  CA file       -- Set CA public key  or   root@shell_sock:~# export CA_CERT=
-  {-p|--port    }  PORT          -- Set listen port    or   root@shell_sock:~# export PORT=
-  {-t|--temp    }  TEMP          -- Set TEMP folder    or   root@shell_sock:~# export TEMP=
-  {-l|--log     }  LOG_PATH      -- Set LOG folder     or   root@shell_sock:~# export LOG_PATH=
-  {-d|--debug   }
-
+  {-k|--key        }  private key   -- Set prvate key      or   root@shell_sock:~# export KEY=
+  {-c|--cert       }  public key    -- Set public key      or   root@shell_sock:~# export CERT=
+  {-C|--ca-cert    }  CA file       -- Set CA public key   or   root@shell_sock:~# export CA_CERT=
+  {-p|--port       }  PORT          -- Set signalling port or   root@shell_sock:~# export PORT=
+  {-m|--media-port }  MEDIA_PORT    -- Set media port      or   root@shell_sock:~# export MEDIA_PORT=
+  {-t|--temp       }  TEMP          -- Set TEMP folder     or   root@shell_sock:~# export TEMP=
+  {-l|--log        }  LOG_PATH      -- Set LOG folder      or   root@shell_sock:~# export LOG_PATH=
+  {-d|--debug      }  DEBUG leve from 1 to 3
 
 ```
 
@@ -110,7 +105,7 @@ Get CA public key chain
 ### Installing client
 ```
 apt-get install socat make
-git clone https://github.com/aze2201/shell_sock.git`
+git clone https://github.com/aze2201/shell_sockV2.git`
 cd shell_sock
 make client
 ```
