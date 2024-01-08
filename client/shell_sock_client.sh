@@ -152,18 +152,18 @@ function signalling() {
    cat $_SHELL_FIFO -| $socat_command - OPENSSL:$SERVER:$PORT,cafile=$CA_CERT,key=$KEY,cert=$CERT,verify=4 | while read line; 
    do
           # Log   
-          echo "$(date)| Message from $SERVER:$PORT is $line"       >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
+          echo "$(date)|INFO|Message from $SERVER:$PORT is $line"       >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
       
 	  # if message is Session ID then, connect local bash to remote 
 	  if [ "$line" != "$(hostname)" ]; then
 	        # Log
-		echo "bin/bash-ing with session $line to $SERVER:$PORT" >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
+		echo "$(date)|INFO|bin/bash-ing with session $line to $SERVER:$PORT" >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
         
 		# connect bash in background
 		$THIS_PATH/bash_media.sh "$line" &
 		media_connect_pid=$!
 		echo $media_connect_pid > $_PID/media.pid
-      fi
+          fi
    done
 }
 
@@ -201,6 +201,7 @@ main() {
       sleep 10s
    done
    # handover to systemd to restart
+   [ ! -z $_SHELL_FIFO ] && rm -rf $_SHELL_FIFO
    exit 1
 }
 main
