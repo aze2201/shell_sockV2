@@ -188,12 +188,13 @@ main() {
    
       # check connection is ESTABLISHED to server.
       lsof -i :$PORT| grep ESTABLISHED > /dev/null   
+      
       # EXIT if not running. Let systemd restart it
       if [ $? -ne 0 ]; then 
-        kill -9 $_c_pid 
-		media_pid=$(lsof -i :$MEDIA_PORT | grep ESTABLISHED| grep -v PID |awk '{print $2}')
-		[ -! z $media_pid ] && kill -9 $media_pid
-        break
+         kill -9 $_c_pid 
+         media_pid=$(lsof -i :$MEDIA_PORT | grep ESTABLISHED| grep -v PID |awk '{print $2}')
+         [ -! z $media_pid ] && kill -9 $media_pid
+         break
       fi
       
       # wait
