@@ -5,10 +5,14 @@ read hostn
 hostn=$(echo $hostn | tr "\r" " " | sed "s/ //g");
 
 # create hostname Folder if not exist
-[ ! -d "$TEMP/$hostn" ] && mkdir "$TEMP/$hostn"
+[ ! -d "$TEMP/$hostn" ] && 
+	(
+          mkdir "$TEMP/$hostn"
+          echo "$(date)|INFO|$hostn folder is creating" >> $LOG_PATH/shell_sock_$(date +"%Y%m%d")
+       )
 
-# Logging
-echo "$(date)|INFO| $hostn folder is creating" >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
+
+echo "$(date):INFO|Connection from $SOCAT_PEERADDR $SOCAT_PEERPORT" >> $LOG_PATH/shell_sock_$(date +"%Y%m%d")
 
 # start loop to keep connection
 while true; do
@@ -24,7 +28,7 @@ while true; do
   # send to client to initialize /bin/bash and map to newest sock file.
   echo $session_id
   echo "$session_id|$sock_file" >> "$TEMP/map.table"
-  echo "$(date)|INFO| New session information set up. SessionID is $session_id" >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
+  echo "$(date)|INFO|New session information set up. SessionID is $session_id" >> "$LOG_PATH/shell_sock_$(date +"%Y%m%d")"
  fi
  sleep 2s
 done

@@ -44,9 +44,9 @@ help()
        echo "  {-c|--cert    }  public key    -- Set public key     or   root@shell_sock:~# export CERT="
        echo "  {-C|--ca-cert }  CA file       -- Set CA public key  or   root@shell_sock:~# export CA_CERT="
        echo "  {-p|--port    }  PORT          -- Set listen port    or   root@shell_sock:~# export PORT="
-	   echo "  {-t|--temp    }  TEMP          -- Set TEMP folder    or   root@shell_sock:~# export TEMP="
-	   echo "  {-l|--log     }  LOG_PATH      -- Set LOG folder     or   root@shell_sock:~# export LOG_PATH="
-	   echo "  {-d|--debug   }  DEBUG leve from 1 to 3"
+       echo "  {-t|--temp    }  TEMP          -- Set TEMP folder    or   root@shell_sock:~# export TEMP="
+       echo "  {-l|--log     }  LOG_PATH      -- Set LOG folder     or   root@shell_sock:~# export LOG_PATH="
+       echo "  {-d|--debug   }  DEBUG leve from 1 to 3"
        echo ""               
        exit 0
 }
@@ -168,7 +168,7 @@ main () {
   signalling &
   [ $? -eq 0 ] && echo $! > $_PID/signalling.pid || 
     (
-      echo "$(date)| ERROR| Signalling server not started. Maybe try with bash -x <script>"	
+      echo "$(date)|ERROR|Signalling server not started. Maybe try with bash -x <script>"	
       exit 1
      )
   
