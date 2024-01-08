@@ -193,7 +193,7 @@ main() {
       if [ $? -ne 0 ]; then 
          kill -9 $_c_pid 
          media_pid=$(lsof -i :$MEDIA_PORT | grep ESTABLISHED| grep -v PID |awk '{print $2}')
-         [ -! z $media_pid ] && kill -9 $media_pid
+         [ ! -z $media_pid ] && kill -9 $media_pid
          break
       fi
       

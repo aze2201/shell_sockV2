@@ -139,7 +139,7 @@ initialize() {
 
 # SIGNALING
 function signalling() {
-     $socat_command openssl-listen:$PORT,fork,cert=$CERT,key=$KEY,cafile=$CA_CERT,verify=4 system:'
+     $socat_command openssl-listen:$PORT,fork,cert=$CERT,key=$KEY,cafile=$CA_CERT,verify=4,openssl-min-proto-version=TLS1.2 system:'
      {
          $THIS_PATH/signalling.sh
      }'
@@ -151,7 +151,7 @@ function signalling() {
 
 # Media exchange with client /bin/bash
 media() {
-    $socat_command openssl-listen:$MEDIA_PORT,fork,cert=$CERT,key=$KEY,cafile=$CA_CERT,verify=4 system:'
+    $socat_command openssl-listen:$MEDIA_PORT,fork,cert=$CERT,key=$KEY,cafile=$CA_CERT,verify=4,openssl-min-proto-version=TLS1.2 system:'
     { 
        $THIS_PATH/media.sh
     }'
