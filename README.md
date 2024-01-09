@@ -17,7 +17,7 @@ Numerous modern solutions exist for securely connecting Linux systems behind NAT
 Socat is a flexible, multi-purpose relay tool. Its purpose is to establish a relationship between two data sources, where each data source can be a file, a Unix socket, UDP, TCP, or standard input.
 
 ## Documentation
-![Doc](https://aze2201.github.io/shell_sockV2)
+[Doc](https://aze2201.github.io/shell_sockV2)
 
 ## How to install 
 ### Depencecies:
