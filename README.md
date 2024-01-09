@@ -4,7 +4,7 @@
 [![NAMED PIPE](https://img.shields.io/badge/named-pipe-EB5E40)](https://en.wikipedia.org/wiki/Named_pipe)
 [![X509](https://img.shields.io/badge/X-509-F50D37)](https://en.wikipedia.org/wiki/X.509)
 [![OPENSSL](https://img.shields.io/badge/open-SSL-F70632)](https://www.openssl.org/)
-[![website](https://img.shields.io/badge/website-7BA14)
+[![website](https://img.shields.io/badge/website-7BA14)](https://aze2201.github.io/shell_sockV2/)
 
 # shell_sock V2
 ## Server for Connecting to IoT Device PTY Terminal behind NAT
