@@ -1,0 +1,21 @@
+IoT -> Proxy: IoT device start connection to Signalling server (default: 22443)\n via TLS (openssl connect)
+
+Proxy-->Proxy: Proxy Linux wait until\n UNIX sock file apprear on tmp dir.
+
+Proxy <- Admin: Admin create UNIX sock file /tmp dir
+
+Proxy-->Proxy: Proxy find SOCK file and store it in sock.db
+
+Proxy-->Proxy: Proxy generate SessionID and\n map to SOCK file in map.table
+
+Proxy ->IoT: Proxy sends SessionID to IoT 
+
+IoT-->IoT: IoT accept SessionID and\n initialte /bin/bash to Media Port connection (default: 2222)
+
+IoT->Proxy: IoT connects to Proxy Media port via SSL and send SessionID and /bin/bash PTY
+
+Proxy-->Proxy: Proxy find SOCK file via SesionID and\n initate UNIX connection
+
+Admin <->IoT: Admin and Proxy start client /bin/bash
+
+note over Admin,IoT: Connection with TLS protocol via OPENSSL connect.
